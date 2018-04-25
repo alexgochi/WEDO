@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">WEDO</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_clear">Clear</string>
+    <string name="nav_text">STOP Wishing, START Doing</string>
+    <string name="nav_title">What We Do?</string>
+    <string name="social">Social</string>
+    <string name="work">Work</string>
+    <string name="important">Important</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="today">Today&#032;&#032;</string>
+    <string name="home">Home</string>
+    <string name="overview">Overview</string>
+    <string name="desc_overview">Tab to view statistic</string>
+    <string name="todo_list">Todo List</string>
+    <string name="hint_note">Note</string>
+    <string name="input_todo">List can not be empty!</string>
+    <string name="title">Hello You</string>
+    <string name="delete_text">Done</string>
+    <string name="todo">TODO</string>
+    <string name="total">Total&#032;:&#032;%d </string>
+    <string name="main_total">&#032;%d&#032;List</string>
+
+</resources>
