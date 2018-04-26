@@ -77,9 +77,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="235dp"
-                android:layout_marginStart="235dp"
-                android:text="@string/main_total"
+                android:layout_marginLeft="250dp"
+                android:layout_marginStart="250dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -110,9 +109,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="235dp"
-                android:layout_marginStart="235dp"
-                android:text="@string/main_total"
+                android:layout_marginLeft="250dp"
+                android:layout_marginStart="250dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -143,9 +141,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="235dp"
-                android:layout_marginStart="235dp"
-                android:text="@string/main_total"
+                android:layout_marginLeft="250dp"
+                android:layout_marginStart="250dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -176,9 +173,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="235dp"
-                android:layout_marginStart="235dp"
-                android:text="@string/main_total"
+                android:layout_marginLeft="250dp"
+                android:layout_marginStart="250dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -209,9 +205,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="235dp"
-                android:layout_marginStart="235dp"
-                android:text="@string/main_total"
+                android:layout_marginLeft="250dp"
+                android:layout_marginStart="250dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

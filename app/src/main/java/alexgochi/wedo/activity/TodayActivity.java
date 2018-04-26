@@ -2,6 +2,7 @@ package alexgochi.wedo.activity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -24,8 +25,11 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
+import alexgochi.wedo.MainActivity;
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
 import alexgochi.wedo.TaskDBHelper;
@@ -53,8 +57,6 @@ public class TodayActivity extends AppCompatActivity {
         });
 
         Ltoday = (SwipeMenuListView) findViewById(R.id.list_today);
-
-        updateUI();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -87,6 +89,8 @@ public class TodayActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        updateUI();
     }
 
     private void updateUI() {
@@ -171,7 +175,7 @@ public class TodayActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public void getCount() {
+    public int getCount() {
         int mCount = 0;
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
@@ -182,6 +186,7 @@ public class TodayActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
+        return mCount;
     }
 
     @Override

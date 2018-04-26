@@ -53,7 +53,6 @@ public class TomorrowActivity extends AppCompatActivity {
         });
 
         LTomorrow = (SwipeMenuListView) findViewById(R.id.list_tomorrow);
-        updateUI();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -86,6 +85,8 @@ public class TomorrowActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        updateUI();
     }
 
     private void updateUI() {
@@ -170,7 +171,7 @@ public class TomorrowActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public void getCount() {
+    public int getCount() {
         int mCount = 0;
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE2;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
@@ -181,6 +182,7 @@ public class TomorrowActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
+        return mCount;
     }
 
     @Override

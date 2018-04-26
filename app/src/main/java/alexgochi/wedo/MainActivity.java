@@ -1,8 +1,6 @@
 package alexgochi.wedo;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,16 +8,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import alexgochi.wedo.activity.ImportantActivity;
 import alexgochi.wedo.activity.SocialActivity;
@@ -27,8 +19,11 @@ import alexgochi.wedo.activity.TodayActivity;
 import alexgochi.wedo.activity.TomorrowActivity;
 import alexgochi.wedo.activity.WorkActivity;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView today_count, tomorrow_count,important_count, work_count, social_count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,32 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        today_count = (TextView) findViewById(R.id.main_today);
+//        today_count.setText(todayActivity.getCount());
+
+//        String totalListToday = getString(R.string.main_total);
+//        totalListToday = String.format(totalListToday, todayActivity.getCount());
+//        today_count.setText(totalListToday);
+
+//        tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
+//        String totalListTomorrow = getString(R.string.main_total);
+//        totalListTomorrow = String.format(totalListTomorrow, tomorrowActivity.getCount());
+//        tomorrow_count.setText(totalListTomorrow);
+//
+//        important_count = (TextView) findViewById(R.id.main_important);
+//        String totalListImportant = getString(R.string.main_total);
+//        totalListImportant = String.format(totalListImportant, importantActivity.getCount());
+//        important_count.setText(totalListImportant);
+//
+//        work_count = (TextView) findViewById(R.id.main_work);
+//        String totalListWork = getString(R.string.main_total);
+//        totalListWork = String.format(totalListWork, workActivity.getCount());
+//        work_count.setText(totalListWork);
+//
+//        social_count = (TextView) findViewById(R.id.main_social);
+//        String totalListSocial = getString(R.string.main_total);
+//        totalListSocial = String.format(totalListSocial, socialActivity.getCount());
+//        social_count.setText(totalListSocial);
     }
 
     public void mPieChartLaunch(View view) {

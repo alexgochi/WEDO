@@ -53,7 +53,6 @@ public class WorkActivity extends AppCompatActivity {
         });
 
         Lwork = (SwipeMenuListView) findViewById(R.id.list_work);
-        updateUI();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -86,6 +85,8 @@ public class WorkActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        updateUI();
     }
 
     private void updateUI() {
@@ -170,7 +171,7 @@ public class WorkActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public void getCount() {
+    public int getCount() {
         int mCount = 0;
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE4;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
@@ -181,6 +182,7 @@ public class WorkActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
+        return mCount;
     }
 
     @Override
