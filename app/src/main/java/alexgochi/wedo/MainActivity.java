@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TodayActivity todayActivity = new TodayActivity();
+        TomorrowActivity tomorrowActivity = new TomorrowActivity();
+        ImportantActivity importantActivity = new ImportantActivity();
+        WorkActivity workActivity = new WorkActivity();
+        SocialActivity socialActivity = new SocialActivity();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

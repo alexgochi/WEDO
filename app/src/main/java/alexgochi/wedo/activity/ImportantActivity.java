@@ -170,6 +170,19 @@ public class ImportantActivity extends AppCompatActivity {
         updateUI();
     }
 
+    public void getCount() {
+        int mCount = 0;
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE3;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

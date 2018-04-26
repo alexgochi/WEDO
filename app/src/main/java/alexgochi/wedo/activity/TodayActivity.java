@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
@@ -170,6 +169,19 @@ public class TodayActivity extends AppCompatActivity {
         db.execSQL("DELETE FROM " + TaskContract.TaskEntry.TABLE1);
         db.close();
         updateUI();
+    }
+
+    public void getCount() {
+        int mCount = 0;
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
     }
 
     @Override

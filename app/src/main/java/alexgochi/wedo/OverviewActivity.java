@@ -14,6 +14,12 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
+import alexgochi.wedo.activity.ImportantActivity;
+import alexgochi.wedo.activity.SocialActivity;
+import alexgochi.wedo.activity.TodayActivity;
+import alexgochi.wedo.activity.TomorrowActivity;
+import alexgochi.wedo.activity.WorkActivity;
+
 public class OverviewActivity extends AppCompatActivity {
     PieChart pieChart;
 
@@ -49,10 +55,10 @@ public class OverviewActivity extends AppCompatActivity {
 
         pieChart.animateY(1000, Easing.EasingOption.EaseInCubic);
 
-        PieDataSet mDataSet = new PieDataSet(mValue, "List");
+        PieDataSet mDataSet = new PieDataSet(mValue, "");
         mDataSet.setSliceSpace(3f);
         mDataSet.setSelectionShift(6f);
-        mDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+        mDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         PieData mData = new PieData(mDataSet);
         mData.setValueTextSize(12f);
