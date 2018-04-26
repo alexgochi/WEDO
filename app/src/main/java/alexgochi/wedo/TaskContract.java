@@ -12,7 +12,23 @@ public class TaskContract {
 
     public class TaskEntry implements BaseColumns {
         //Today
-        public static final String TABLE = "tasks";
-        public static final String COL_TASK_TITLE ="title";
+        public static final String TABLE1 = "today";
+        public static final String COL_TASK_TITLE1 ="col_today";
+
+        //Tomorrow
+        public static final String TABLE2 = "tomorrow";
+        public static final String COL_TASK_TITLE2 ="col_tomorrow";
+
+        //Important
+        public static final String TABLE3 = "important";
+        public static final String COL_TASK_TITLE3 ="col_tomorrow";
+
+        //Work
+        public static final String TABLE4 = "work";
+        public static final String COL_TASK_TITLE4 ="col_work";
+
+        //Social
+        public static final String TABLE5 = "social";
+        public static final String COL_TASK_TITLE5 ="col_social";
     }
 }

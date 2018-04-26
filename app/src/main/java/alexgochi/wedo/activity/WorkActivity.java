@@ -94,12 +94,12 @@ public class WorkActivity extends AppCompatActivity {
     private void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE,
-                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COL_TASK_TITLE},
+        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE4,
+                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COL_TASK_TITLE4},
                 null, null, null, null, null);
 
         while (cursor.moveToNext()) {
-            int idx = cursor.getColumnIndex(TaskContract.TaskEntry.COL_TASK_TITLE);
+            int idx = cursor.getColumnIndex(TaskContract.TaskEntry.COL_TASK_TITLE4);
             taskList.add(cursor.getString(idx));
         }
 
@@ -132,8 +132,8 @@ public class WorkActivity extends AppCompatActivity {
                             String mNoteTodo = mNote.getText().toString();
                             SQLiteDatabase db = mHelper.getWritableDatabase();
                             ContentValues values = new ContentValues();
-                            values.put(TaskContract.TaskEntry.COL_TASK_TITLE, mNoteTodo);
-                            db.insertWithOnConflict(TaskContract.TaskEntry.TABLE,
+                            values.put(TaskContract.TaskEntry.COL_TASK_TITLE4, mNoteTodo);
+                            db.insertWithOnConflict(TaskContract.TaskEntry.TABLE4,
                                     null, values, SQLiteDatabase.CONFLICT_REPLACE);
                             db.close();
                             updateUI();
@@ -154,8 +154,8 @@ public class WorkActivity extends AppCompatActivity {
         TextView taskTextView = (TextView) findViewById(R.id.task_title);
         String task = String.valueOf(taskTextView.getText());
         SQLiteDatabase db = mHelper.getWritableDatabase();
-        db.delete(TaskContract.TaskEntry.TABLE,
-                TaskContract.TaskEntry.COL_TASK_TITLE+ " = ?",
+        db.delete(TaskContract.TaskEntry.TABLE4,
+                TaskContract.TaskEntry.COL_TASK_TITLE4+ " = ?",
                 new String[]{task});
         db.close();
         updateUI();
