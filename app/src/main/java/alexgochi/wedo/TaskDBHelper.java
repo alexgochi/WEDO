@@ -10,27 +10,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class TaskDBHelper extends SQLiteOpenHelper {
     //Today
-    String createTableToday = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE1 +" (" +
+    private String createTableToday = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE1 +" (" +
             TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
             TaskContract.TaskEntry.COL_TASK_TITLE1 + " TEXT NOT NULL);";
 
     //Tomorrow
-    String createTableTomorrow = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE2 +" (" +
+    private String createTableTomorrow = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE2 +" (" +
             TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
             TaskContract.TaskEntry.COL_TASK_TITLE2 + " TEXT NOT NULL);";
 
     //Important
-    String createTableImportant = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE3 +" (" +
+    private String createTableImportant = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE3 +" (" +
             TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
             TaskContract.TaskEntry.COL_TASK_TITLE3 + " TEXT NOT NULL);";
 
     //Work
-    String createTableWork = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE4 +" (" +
+    private String createTableWork = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE4 +" (" +
             TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
             TaskContract.TaskEntry.COL_TASK_TITLE4 + " TEXT NOT NULL);";
 
     //Social
-    String createTableSocial = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE5 +" (" +
+    private String createTableSocial = "CREATE TABLE "+ TaskContract.TaskEntry.TABLE5 +" (" +
             TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
             TaskContract.TaskEntry.COL_TASK_TITLE5 + " TEXT NOT NULL);";
 

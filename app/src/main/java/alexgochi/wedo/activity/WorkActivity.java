@@ -53,22 +53,17 @@ public class WorkActivity extends AppCompatActivity {
         Lwork = (SwipeMenuListView) findViewById(R.id.list_work);
         updateUI();
 
-        work = (TextView) findViewById(R.id.total_work);
-        String totalList = getString(R.string.total);
-        totalList = String.format(totalList, Lwork.getAdapter().getCount());
-        work.setText(totalList);
-
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 // set item background
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(0x00, 0xCC, 0x00)));
                 // set item width
                 deleteItem.setWidth(70);
                 // set a icon
-                deleteItem.setIcon(R.drawable.ic_delete);
+                deleteItem.setIcon(R.drawable.ic_done);
                 // add to menu
                 menu.addMenuItem(deleteItem);
             }
@@ -82,7 +77,7 @@ public class WorkActivity extends AppCompatActivity {
                 switch (index) {
                     case 0:
                         deleteTask();
-                        Toast.makeText(getApplicationContext(), "List Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "List Completed", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 // false : close the menu; true : not close the menu
@@ -112,6 +107,11 @@ public class WorkActivity extends AppCompatActivity {
             mAdapter.addAll(taskList);
             mAdapter.notifyDataSetChanged();
         }
+
+        work = (TextView) findViewById(R.id.total_work);
+        String totalList = getString(R.string.total);
+        totalList = String.format(totalList, Lwork.getAdapter().getCount());
+        work.setText(totalList);
 
         cursor.close();
         db.close();
