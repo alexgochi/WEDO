@@ -52,10 +52,10 @@ public class OverviewActivity extends AppCompatActivity {
         PieDataSet mDataSet = new PieDataSet(mValue, "List");
         mDataSet.setSliceSpace(3f);
         mDataSet.setSelectionShift(6f);
-        mDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        mDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
 
         PieData mData = new PieData(mDataSet);
-        mData.setValueTextSize(10f);
+        mData.setValueTextSize(12f);
         mData.setValueTextColor(Color.BLACK);
 
         pieChart.setData(mData);
