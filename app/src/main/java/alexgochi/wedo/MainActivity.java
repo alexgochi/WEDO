@@ -50,10 +50,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        if (savedInstanceState != null) {
-
-        }
     }
 
     @Override
@@ -66,15 +62,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         outState.putInt("SOCIAL", data_social);
     }
 
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        data_today = savedInstanceState.getInt("TODAY",0);
-//        data_tomorrow = savedInstanceState.getInt("TODAY",0);
-//        data_important = savedInstanceState.getInt("TODAY",0);
-//        data_work = savedInstanceState.getInt("TODAY",0);
-//        data_social = savedInstanceState.getInt("TODAY",0);
-//    }
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        data_today = savedInstanceState.getInt("TODAY",0);
+        today_count.setText(data_today + " List");
+        data_tomorrow = savedInstanceState.getInt("TOMORROW",0);
+        tomorrow_count.setText(data_tomorrow + " List");
+        data_important = savedInstanceState.getInt("IMPORTANT",0);
+        important_count.setText(data_important + " List");
+        data_work = savedInstanceState.getInt("WORK",0);
+        work_count.setText(data_work + " List");
+        data_social = savedInstanceState.getInt("SOCIAL",0);
+        social_count.setText(data_social + " List");
+    }
 
     public void mPieChartLaunch(View view) {
         Intent intent = new Intent(MainActivity.this, OverviewActivity.class);
