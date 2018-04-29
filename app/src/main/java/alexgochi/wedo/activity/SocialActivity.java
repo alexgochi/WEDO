@@ -2,6 +2,7 @@ package alexgochi.wedo.activity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
+import alexgochi.wedo.MainActivity;
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
 import alexgochi.wedo.TaskDBHelper;
@@ -36,6 +38,7 @@ public class SocialActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     ImageView imageSocial;
     TextView social;
+    int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +114,9 @@ public class SocialActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
+        getCount();
         social = (TextView) findViewById(R.id.total_social);
-        String totalList = getString(R.string.total);
-        totalList = String.format(totalList, Lsocial.getAdapter().getCount());
-        social.setText(totalList);
+        social.setText("Total : "+ mCount);
 
         cursor.close();
         db.close();
@@ -171,8 +173,7 @@ public class SocialActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public int getCount() {
-        int mCount = 0;
+    public void getCount() {
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE5;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
 
@@ -182,7 +183,6 @@ public class SocialActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
-        return mCount;
     }
 
     @Override
@@ -206,5 +206,13 @@ public class SocialActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void passData(View view) {
+    int in_social = mCount;
+    Intent intent_social = new Intent(SocialActivity.this, MainActivity.class);
+    intent_social.putExtra ("SOCIAL", in_social);
+
+    startActivity(intent_social);
     }
 }

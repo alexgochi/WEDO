@@ -2,6 +2,7 @@ package alexgochi.wedo.activity;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -26,6 +27,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
+import alexgochi.wedo.MainActivity;
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
 import alexgochi.wedo.TaskDBHelper;
@@ -36,6 +38,7 @@ public class TomorrowActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter;
     ImageView imageTomorrow;
     TextView tomorrow;
+    int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +114,9 @@ public class TomorrowActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
+        getCount();
         tomorrow = (TextView) findViewById(R.id.total_tomorrow);
-        String totalList = getString(R.string.total);
-        totalList = String.format(totalList, LTomorrow.getAdapter().getCount());
-        tomorrow.setText(totalList);
+        tomorrow.setText("Total : " +mCount);
 
         cursor.close();
         db.close();
@@ -171,8 +173,7 @@ public class TomorrowActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public int getCount() {
-        int mCount = 0;
+    public void getCount() {
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE2;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
 
@@ -182,7 +183,6 @@ public class TomorrowActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
-        return mCount;
     }
 
     @Override
@@ -206,5 +206,13 @@ public class TomorrowActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void passData(View view) {
+        int in_tommorrow = mCount;
+        Intent intent_tomorrow = new Intent(TomorrowActivity.this, MainActivity.class);
+        intent_tomorrow.putExtra("TOMORROW", in_tommorrow);
+
+        startActivity(intent_tomorrow);
     }
 }

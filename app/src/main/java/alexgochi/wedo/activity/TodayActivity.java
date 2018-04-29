@@ -25,8 +25,6 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import alexgochi.wedo.MainActivity;
@@ -38,8 +36,9 @@ public class TodayActivity extends AppCompatActivity {
     private TaskDBHelper mHelper;
     private SwipeMenuListView Ltoday;
     private ArrayAdapter<String> mAdapter;
-    ImageView imageToday;
+    ImageView imageToday, pass_button;
     TextView today;
+    int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,10 +114,9 @@ public class TodayActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
+        getCount();
         today = (TextView) findViewById(R.id.total_today);
-        String totalList = getString(R.string.total);
-        totalList = String.format(totalList, Ltoday.getAdapter().getCount());
-        today.setText(totalList);
+        today.setText("Total : "+ mCount);
 
         cursor.close();
         db.close();
@@ -175,8 +173,7 @@ public class TodayActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public int getCount() {
-        int mCount = 0;
+    public void getCount() {
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
 
@@ -186,7 +183,6 @@ public class TodayActivity extends AppCompatActivity {
 //            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
-        return mCount;
     }
 
     @Override
@@ -212,4 +208,11 @@ public class TodayActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void passData(View view) {
+        int in_today = mCount;
+        Intent intent_today = new Intent(TodayActivity.this, MainActivity.class);
+        intent_today.putExtra("TODAY", in_today);
+
+        startActivity(intent_today);
+    }
 }

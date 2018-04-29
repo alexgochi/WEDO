@@ -1,7 +1,9 @@
 package alexgochi.wedo;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,6 +15,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.zip.GZIPInputStream;
+
 import alexgochi.wedo.activity.ImportantActivity;
 import alexgochi.wedo.activity.SocialActivity;
 import alexgochi.wedo.activity.TodayActivity;
@@ -20,21 +26,21 @@ import alexgochi.wedo.activity.TomorrowActivity;
 import alexgochi.wedo.activity.WorkActivity;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView today_count, tomorrow_count,important_count, work_count, social_count;
+    int data_today, data_tomorrow, data_important, data_work, data_social;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TodayActivity todayActivity = new TodayActivity();
-        TomorrowActivity tomorrowActivity = new TomorrowActivity();
-        ImportantActivity importantActivity = new ImportantActivity();
-        WorkActivity workActivity = new WorkActivity();
-        SocialActivity socialActivity = new SocialActivity();
+        today_count = (TextView) findViewById(R.id.main_today);
+        tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
+        important_count = (TextView) findViewById(R.id.main_important);
+        work_count = (TextView) findViewById(R.id.main_work);
+        social_count = (TextView) findViewById(R.id.main_social);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,32 +54,37 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        today_count = (TextView) findViewById(R.id.main_today);
-//        today_count.setText(todayActivity.getCount());
+        savedInstanceState = getIntent().getExtras();
+        if (savedInstanceState != null && getIntent().getIntExtra("TODAY",0) != 0) {
+            data_today = savedInstanceState.getInt("TODAY");
+            today_count.setText(data_today + " List");
+        }
+        if (savedInstanceState!= null && getIntent().getIntExtra("TOMORROW",0) != 0) {
+            data_tomorrow = savedInstanceState.getInt("TOMORROW");
+            tomorrow_count.setText(data_tomorrow +" List");
+        }
+        if (savedInstanceState != null && getIntent().getIntExtra("IMPORTANT",0) != 0) {
+            data_important = savedInstanceState.getInt("IMPORTANT");
+            important_count.setText(data_important +" List");
+        }
+        if (savedInstanceState != null && getIntent().getIntExtra("WORK",0) != 0) {
+            data_work = savedInstanceState.getInt("WORK");
+            work_count.setText(data_work +" List");
+        }
+        if (savedInstanceState!= null && getIntent().getIntExtra("SOCIAL",0) != 0) {
+            data_social = savedInstanceState.getInt("SOCIAL");
+            social_count.setText(data_social +" List");
+        }
+    }
 
-//        String totalListToday = getString(R.string.main_total);
-//        totalListToday = String.format(totalListToday, todayActivity.getCount());
-//        today_count.setText(totalListToday);
-
-//        tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
-//        String totalListTomorrow = getString(R.string.main_total);
-//        totalListTomorrow = String.format(totalListTomorrow, tomorrowActivity.getCount());
-//        tomorrow_count.setText(totalListTomorrow);
-//
-//        important_count = (TextView) findViewById(R.id.main_important);
-//        String totalListImportant = getString(R.string.main_total);
-//        totalListImportant = String.format(totalListImportant, importantActivity.getCount());
-//        important_count.setText(totalListImportant);
-//
-//        work_count = (TextView) findViewById(R.id.main_work);
-//        String totalListWork = getString(R.string.main_total);
-//        totalListWork = String.format(totalListWork, workActivity.getCount());
-//        work_count.setText(totalListWork);
-//
-//        social_count = (TextView) findViewById(R.id.main_social);
-//        String totalListSocial = getString(R.string.main_total);
-//        totalListSocial = String.format(totalListSocial, socialActivity.getCount());
-//        social_count.setText(totalListSocial);
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putInt("TODAY", data_today);
+        savedInstanceState.putInt("TOMORROW", data_tomorrow);
+        savedInstanceState.putInt("IMPORTANT", data_tomorrow);
+        savedInstanceState.putInt("WORK", data_work);
+        savedInstanceState.putInt("SOCIAL", data_social);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     public void mPieChartLaunch(View view) {
