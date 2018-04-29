@@ -209,10 +209,10 @@ public class SocialActivity extends AppCompatActivity {
     }
 
     public void passData(View view) {
-    int in_social = mCount;
-    Intent intent_social = new Intent(SocialActivity.this, MainActivity.class);
-    intent_social.putExtra ("SOCIAL", in_social);
-
-    startActivity(intent_social);
+        int in_today = mCount;
+        Intent intent_today = new Intent();
+        intent_today.putExtra("SOCIAL", in_today);
+        setResult(RESULT_OK, intent_today);
+        finish();
     }
 }

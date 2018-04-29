@@ -1,9 +1,7 @@
 package alexgochi.wedo;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,9 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.zip.GZIPInputStream;
+import java.io.Serializable;
 
 import alexgochi.wedo.activity.ImportantActivity;
 import alexgochi.wedo.activity.SocialActivity;
@@ -30,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     TextView today_count, tomorrow_count,important_count, work_count, social_count;
     int data_today, data_tomorrow, data_important, data_work, data_social;
-    private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
+    private static final int ACTIVITY_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,38 +51,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        savedInstanceState = getIntent().getExtras();
-//        if (savedInstanceState != null && getIntent().getIntExtra("TODAY",0) != 0) {
-//            data_today = savedInstanceState.getInt("TODAY");
-//            today_count.setText(data_today + " List");
-//        }
-//        if (savedInstanceState!= null && getIntent().getIntExtra("TOMORROW",0) != 0) {
-//            data_tomorrow = savedInstanceState.getInt("TOMORROW");
-//            tomorrow_count.setText(data_tomorrow +" List");
-//        }
-//        if (savedInstanceState != null && getIntent().getIntExtra("IMPORTANT",0) != 0) {
-//            data_important = savedInstanceState.getInt("IMPORTANT");
-//            important_count.setText(data_important +" List");
-//        }
-//        if (savedInstanceState != null && getIntent().getIntExtra("WORK",0) != 0) {
-//            data_work = savedInstanceState.getInt("WORK");
-//            work_count.setText(data_work +" List");
-//        }
-//        if (savedInstanceState!= null && getIntent().getIntExtra("SOCIAL",0) != 0) {
-//            data_social = savedInstanceState.getInt("SOCIAL");
-//            social_count.setText(data_social +" List");
-//        }
+        if (savedInstanceState != null) {
+
+        }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle savedInstanceState) {
-//        savedInstanceState.putInt("TODAY", data_today);
-//        savedInstanceState.putInt("TOMORROW", data_tomorrow);
-//        savedInstanceState.putInt("IMPORTANT", data_important);
-//        savedInstanceState.putInt("WORK", data_work);
-//        savedInstanceState.putInt("SOCIAL", data_social);
-        super.onSaveInstanceState(savedInstanceState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("TODAY", data_today);
+        outState.putInt("TOMORROW", data_tomorrow);
+        outState.putInt("IMPORTANT", data_important);
+        outState.putInt("WORK", data_work);
+        outState.putInt("SOCIAL", data_social);
     }
+
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        data_today = savedInstanceState.getInt("TODAY",0);
+//        data_tomorrow = savedInstanceState.getInt("TODAY",0);
+//        data_important = savedInstanceState.getInt("TODAY",0);
+//        data_work = savedInstanceState.getInt("TODAY",0);
+//        data_social = savedInstanceState.getInt("TODAY",0);
+//    }
 
     public void mPieChartLaunch(View view) {
         Intent intent = new Intent(MainActivity.this, OverviewActivity.class);
@@ -111,23 +99,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
        if (id == R.id.today) {
            Intent in_today = new Intent(MainActivity.this, TodayActivity.class);
-           startActivity(in_today);
+           startActivityForResult(in_today, ACTIVITY_REQUEST_CODE);
            Toast.makeText(getApplicationContext(), "You're in Today Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.tomorrow) {
            Intent in_tomorrow = new Intent(MainActivity.this, TomorrowActivity.class);
-           startActivity(in_tomorrow);
+           startActivityForResult(in_tomorrow, ACTIVITY_REQUEST_CODE);
            Toast.makeText(getApplicationContext(), "You're in Tomorrow Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.important) {
            Intent in_important = new Intent(MainActivity.this, ImportantActivity.class);
-           startActivity(in_important);
+           startActivityForResult(in_important, ACTIVITY_REQUEST_CODE);
            Toast.makeText(getApplicationContext(), "You're in Important Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.work) {
            Intent in_work = new Intent(MainActivity.this, WorkActivity.class);
-           startActivity(in_work);
+           startActivityForResult(in_work, ACTIVITY_REQUEST_CODE);
            Toast.makeText(getApplicationContext(), "You're in Work Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.social) {
            Intent in_social = new Intent(MainActivity.this, SocialActivity.class);
-           startActivity(in_social);
+           startActivityForResult(in_social, ACTIVITY_REQUEST_CODE);
            Toast.makeText(getApplicationContext(), "You're in Social Activity", Toast.LENGTH_SHORT).show();
         }
 
@@ -139,10 +127,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_today = data.getIntExtra("TODAY", 0);
-                today_count.setText(data_today);
+                data_today = data.getIntExtra("TODAY", ACTIVITY_REQUEST_CODE);
+                today_count.setText(data_today + " List");
+            }
+            if (resultCode == RESULT_OK) {
+                data_tomorrow = data.getIntExtra("TOMORROW", ACTIVITY_REQUEST_CODE);
+                tomorrow_count.setText(data_tomorrow + " List");
+            }
+            if (resultCode == RESULT_OK) {
+                data_important = data.getIntExtra("IMPORTANT", ACTIVITY_REQUEST_CODE);
+                important_count.setText(data_important + " List");
+            }
+            if (resultCode == RESULT_OK) {
+                data_work = data.getIntExtra("WORK", ACTIVITY_REQUEST_CODE);
+                work_count.setText(data_work + " List");
+            }
+            if (resultCode == RESULT_OK) {
+                data_social = data.getIntExtra("SOCIAL", ACTIVITY_REQUEST_CODE);
+                social_count.setText(data_social + " List");
             }
         }
     }

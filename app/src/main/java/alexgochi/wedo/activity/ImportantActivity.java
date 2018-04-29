@@ -209,10 +209,10 @@ public class ImportantActivity extends AppCompatActivity {
     }
 
     public void passData(View view) {
-        int in_important = mCount;
-        Intent intent_important = new Intent(ImportantActivity.this, MainActivity.class);
-        intent_important.putExtra("IMPORTANT", in_important);
-
-        startActivity(intent_important);
+        int in_today = mCount;
+        Intent intent_today = new Intent();
+        intent_today.putExtra("IMPORTANT", in_today);
+        setResult(RESULT_OK, intent_today);
+        finish();
     }
 }
