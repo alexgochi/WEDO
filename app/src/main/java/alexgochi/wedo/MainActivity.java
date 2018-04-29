@@ -28,7 +28,7 @@ import alexgochi.wedo.activity.WorkActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView  tomorrow_count,important_count, work_count, social_count;
+    TextView today_count, tomorrow_count,important_count, work_count, social_count;
     int data_today, data_tomorrow, data_important, data_work, data_social;
     private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
 
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        today_count = (TextView) findViewById(R.id.main_today);
         tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
         important_count = (TextView) findViewById(R.id.main_important);
         work_count = (TextView) findViewById(R.id.main_work);
@@ -140,9 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_today = data.getIntExtra("TODAY", RESULT_OK);
-
-                TextView today_count = (TextView) findViewById(R.id.main_today);
+                data_today = data.getIntExtra("TODAY", 0);
                 today_count.setText(data_today);
             }
         }
