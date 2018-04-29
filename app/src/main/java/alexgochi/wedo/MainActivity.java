@@ -1,6 +1,7 @@
 package alexgochi.wedo;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,14 +24,16 @@ import alexgochi.wedo.activity.WorkActivity;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private TaskDBHelper mHelper;
+    int mCount = 0;
 
     TextView today_count, tomorrow_count,important_count, work_count, social_count;
     int data_today, data_tomorrow, data_important, data_work, data_social;
-    private static final int TODAY_REQUEST_CODE = 0;
-    private static final int TOMORROW_REQUEST_CODE = 0;
-    private static final int IMPORTANT_REQUEST_CODE = 0;
-    private static final int WORK_REQUEST_CODE = 0;
-    private static final int SOCIAL_REQUEST_CODE = 0;
+    private static final int TODAY_REQUEST_CODE = 1;
+    private static final int TOMORROW_REQUEST_CODE = 2;
+    private static final int IMPORTANT_REQUEST_CODE = 3;
+    private static final int WORK_REQUEST_CODE = 4;
+    private static final int SOCIAL_REQUEST_CODE = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         today_count = (TextView) findViewById(R.id.main_today);
+        today_count.setText("Total : "+ mCount);
+
         tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
+//        tomorrow_count.setText("Total : "+ mCount);
+
         important_count = (TextView) findViewById(R.id.main_important);
+//        important_count.setText("Total : "+ mCount);
+
         work_count = (TextView) findViewById(R.id.main_work);
+//        important_count.setText("Total : "+ mCount);
+
         social_count = (TextView) findViewById(R.id.main_social);
+//        social_count.setText("Total : "+ mCount);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,32 +66,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getCount();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("TODAY", data_today);
-        outState.putInt("TOMORROW", data_tomorrow);
-        outState.putInt("IMPORTANT", data_important);
-        outState.putInt("WORK", data_work);
-        outState.putInt("SOCIAL", data_social);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        data_today = savedInstanceState.getInt("TODAY",0);
-        today_count.setText(data_today + " List");
-        data_tomorrow = savedInstanceState.getInt("TOMORROW",0);
-        tomorrow_count.setText(data_tomorrow + " List");
-        data_important = savedInstanceState.getInt("IMPORTANT",0);
-        important_count.setText(data_important + " List");
-        data_work = savedInstanceState.getInt("WORK",0);
-        work_count.setText(data_work + " List");
-        data_social = savedInstanceState.getInt("SOCIAL",0);
-        social_count.setText(data_social + " List");
-    }
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt("TODAY", data_today);
+//        outState.putInt("TOMORROW", data_tomorrow);
+//        outState.putInt("IMPORTANT", data_important);
+//        outState.putInt("WORK", data_work);
+//        outState.putInt("SOCIAL", data_social);
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        data_today = savedInstanceState.getInt("TODAY",0);
+//        today_count.setText(data_today + " List");
+//        data_tomorrow = savedInstanceState.getInt("TOMORROW",0);
+//        tomorrow_count.setText(data_tomorrow + " List");
+//        data_important = savedInstanceState.getInt("IMPORTANT",0);
+//        important_count.setText(data_important + " List");
+//        data_work = savedInstanceState.getInt("WORK",0);
+//        work_count.setText(data_work + " List");
+//        data_social = savedInstanceState.getInt("SOCIAL",0);
+//        social_count.setText(data_social + " List");
+//    }
 
     public void mPieChartLaunch(View view) {
         Intent intent = new Intent(MainActivity.this, OverviewActivity.class);
@@ -134,33 +148,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TODAY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_today = data.getIntExtra("TODAY", TODAY_REQUEST_CODE);
+                data_today = data.getIntExtra("TODAY", 0);
                 today_count.setText(data_today + " List");
             }
         }
         if (requestCode == TOMORROW_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_tomorrow = data.getIntExtra("TOMORROW", TOMORROW_REQUEST_CODE);
+                data_tomorrow = data.getIntExtra("TOMORROW", 0);
                 tomorrow_count.setText(data_tomorrow + " List");
             }
         }
         if (requestCode == IMPORTANT_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_important = data.getIntExtra("IMPORTANT", IMPORTANT_REQUEST_CODE);
+                data_important = data.getIntExtra("IMPORTANT", 0);
                 important_count.setText(data_important + " List");
             }
         }
         if (requestCode == WORK_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_work = data.getIntExtra("WORK", WORK_REQUEST_CODE);
+                data_work = data.getIntExtra("WORK", 0);
                 work_count.setText(data_work + " List");
             }
         }
         if (requestCode == SOCIAL_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                data_social = data.getIntExtra("SOCIAL", SOCIAL_REQUEST_CODE);
+                data_social = data.getIntExtra("SOCIAL", 0);
                 social_count.setText(data_social + " List");
             }
         }
+    }
+
+    public void getCount() {
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
     }
 }
