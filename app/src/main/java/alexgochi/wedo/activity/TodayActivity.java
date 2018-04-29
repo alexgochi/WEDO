@@ -210,9 +210,9 @@ public class TodayActivity extends AppCompatActivity {
 
     public void passData(View view) {
         int in_today = mCount;
-        Intent intent_today = new Intent(TodayActivity.this, MainActivity.class);
+        Intent intent_today = new Intent();
         intent_today.putExtra("TODAY", in_today);
-
-        startActivity(intent_today);
+        setResult(RESULT_OK, intent_today);
+        finish();
     }
 }

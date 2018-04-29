@@ -28,15 +28,15 @@ import alexgochi.wedo.activity.WorkActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView today_count, tomorrow_count,important_count, work_count, social_count;
+    TextView  tomorrow_count,important_count, work_count, social_count;
     int data_today, data_tomorrow, data_important, data_work, data_social;
+    private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        today_count = (TextView) findViewById(R.id.main_today);
         tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
         important_count = (TextView) findViewById(R.id.main_important);
         work_count = (TextView) findViewById(R.id.main_work);
@@ -54,36 +54,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        savedInstanceState = getIntent().getExtras();
-        if (savedInstanceState != null && getIntent().getIntExtra("TODAY",0) != 0) {
-            data_today = savedInstanceState.getInt("TODAY");
-            today_count.setText(data_today + " List");
-        }
-        if (savedInstanceState!= null && getIntent().getIntExtra("TOMORROW",0) != 0) {
-            data_tomorrow = savedInstanceState.getInt("TOMORROW");
-            tomorrow_count.setText(data_tomorrow +" List");
-        }
-        if (savedInstanceState != null && getIntent().getIntExtra("IMPORTANT",0) != 0) {
-            data_important = savedInstanceState.getInt("IMPORTANT");
-            important_count.setText(data_important +" List");
-        }
-        if (savedInstanceState != null && getIntent().getIntExtra("WORK",0) != 0) {
-            data_work = savedInstanceState.getInt("WORK");
-            work_count.setText(data_work +" List");
-        }
-        if (savedInstanceState!= null && getIntent().getIntExtra("SOCIAL",0) != 0) {
-            data_social = savedInstanceState.getInt("SOCIAL");
-            social_count.setText(data_social +" List");
-        }
+//        savedInstanceState = getIntent().getExtras();
+//        if (savedInstanceState != null && getIntent().getIntExtra("TODAY",0) != 0) {
+//            data_today = savedInstanceState.getInt("TODAY");
+//            today_count.setText(data_today + " List");
+//        }
+//        if (savedInstanceState!= null && getIntent().getIntExtra("TOMORROW",0) != 0) {
+//            data_tomorrow = savedInstanceState.getInt("TOMORROW");
+//            tomorrow_count.setText(data_tomorrow +" List");
+//        }
+//        if (savedInstanceState != null && getIntent().getIntExtra("IMPORTANT",0) != 0) {
+//            data_important = savedInstanceState.getInt("IMPORTANT");
+//            important_count.setText(data_important +" List");
+//        }
+//        if (savedInstanceState != null && getIntent().getIntExtra("WORK",0) != 0) {
+//            data_work = savedInstanceState.getInt("WORK");
+//            work_count.setText(data_work +" List");
+//        }
+//        if (savedInstanceState!= null && getIntent().getIntExtra("SOCIAL",0) != 0) {
+//            data_social = savedInstanceState.getInt("SOCIAL");
+//            social_count.setText(data_social +" List");
+//        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putInt("TODAY", data_today);
-        savedInstanceState.putInt("TOMORROW", data_tomorrow);
-        savedInstanceState.putInt("IMPORTANT", data_tomorrow);
-        savedInstanceState.putInt("WORK", data_work);
-        savedInstanceState.putInt("SOCIAL", data_social);
+//        savedInstanceState.putInt("TODAY", data_today);
+//        savedInstanceState.putInt("TOMORROW", data_tomorrow);
+//        savedInstanceState.putInt("IMPORTANT", data_important);
+//        savedInstanceState.putInt("WORK", data_work);
+//        savedInstanceState.putInt("SOCIAL", data_social);
         super.onSaveInstanceState(savedInstanceState);
     }
 
@@ -133,5 +133,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                data_today = data.getIntExtra("TODAY", RESULT_OK);
+
+                TextView today_count = (TextView) findViewById(R.id.main_today);
+                today_count.setText(data_today);
+            }
+        }
     }
 }
