@@ -40,20 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        today_count = (TextView) findViewById(R.id.main_today);
-        today_count.setText("Total : "+ mCount);
-
-        tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
-//        tomorrow_count.setText("Total : "+ mCount);
-
-        important_count = (TextView) findViewById(R.id.main_important);
-//        important_count.setText("Total : "+ mCount);
-
-        work_count = (TextView) findViewById(R.id.main_work);
-//        important_count.setText("Total : "+ mCount);
-
-        social_count = (TextView) findViewById(R.id.main_social);
-//        social_count.setText("Total : "+ mCount);
+        mHelper = new TaskDBHelper(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,7 +54,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getCount();
+        getCountToday();
+        today_count = (TextView) findViewById(R.id.main_today);
+        today_count.setText(mCount +" List");
+
+        getCountTomorrow();
+        tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
+        tomorrow_count.setText(mCount +" List");
+
+        getCountImportant();
+        important_count = (TextView) findViewById(R.id.main_important);
+        important_count.setText(mCount +" List");
+
+        getCountWork();
+        work_count = (TextView) findViewById(R.id.main_work);
+        important_count.setText(mCount +" List");
+
+        getCountSocial();
+        social_count = (TextView) findViewById(R.id.main_social);
+        social_count.setText(mCount +" List");
     }
 
 //    @Override
@@ -178,8 +183,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void getCount() {
+    public void getCountToday() {
         String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+    }
+
+    public void getCountTomorrow() {
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE2;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+    }
+
+    public void getCountImportant() {
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE3;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+    }
+
+    public void getCountWork() {
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE4;
+        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            mCount = cursor.getInt(0);
+//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
+    }
+
+    public void getCountSocial() {
+        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE5;
         Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
 
         if (cursor.getCount() > 0) {
