@@ -180,7 +180,6 @@ public class TomorrowActivity extends AppCompatActivity {
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             mCount = cursor.getInt(0);
-//            Toast.makeText(getApplicationContext(), "Total : "+mCount, Toast.LENGTH_SHORT).show();
         }
         cursor.close();
     }

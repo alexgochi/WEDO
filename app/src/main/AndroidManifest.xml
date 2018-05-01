@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="alexgochi.wedo">
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="27" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_wedo"
@@ -23,12 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OverviewActivity"/>
-        <activity android:name=".activity.TodayActivity"/>
-        <activity android:name=".activity.TomorrowActivity"/>
-        <activity android:name=".activity.WorkActivity"/>
-        <activity android:name=".activity.SocialActivity"/>
-        <activity android:name=".activity.ImportantActivity"/>
+        <activity android:name=".OverviewActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".activity.TodayActivity"
+            android:label="@string/app_today" />
+        <activity android:name=".activity.TomorrowActivity"
+            android:label="@string/app_tomorrow" />
+        <activity android:name=".activity.ImportantActivity"
+            android:label="@string/app_important" />
+        <activity android:name=".activity.WorkActivity"
+            android:label="@string/app_work" />
+        <activity android:name=".activity.SocialActivity"
+            android:label="@string/app_social" />
     </application>
 
 </manifest>

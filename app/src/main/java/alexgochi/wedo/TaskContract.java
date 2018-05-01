@@ -21,7 +21,7 @@ public class TaskContract {
 
         //Important
         public static final String TABLE3 = "important";
-        public static final String COL_TASK_TITLE3 ="col_tomorrow";
+        public static final String COL_TASK_TITLE3 ="col_important";
 
         //Work
         public static final String TABLE4 = "work";

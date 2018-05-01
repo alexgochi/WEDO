@@ -24,6 +24,12 @@
     <string name="todo">TODO</string>
     <string name="total">Total&#032;:&#032;%d </string>
     <string name="main_total">&#032;%d&#032;List</string>
+    <string name="app_today">Today Activity</string>
+    <string name="app_tomorrow">Tomorrow Activity</string>
+    <string name="app_important">Important Activity</string>
+    <string name="app_social">Sosial Activity</string>
+    <string name="app_work">Work Activity</string>
+    <string name="list">0 List</string>
 
 
 </resources>
