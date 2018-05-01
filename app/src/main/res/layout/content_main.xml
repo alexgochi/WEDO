@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -12,6 +12,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="alexgochi.wedo.MainActivity"
     tools:showIn="@layout/app_bar_main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -53,11 +58,6 @@
 
         </android.support.v7.widget.CardView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="ScrollViewCount,UselessParent">
-
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,11 +80,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="250dp"
-                    android:layout_marginStart="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:text="@string/list"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="17sp" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
@@ -110,11 +111,9 @@
                     android:id="@+id/main_tomorrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="250dp"
-                    android:layout_marginStart="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:text="@string/list"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -143,11 +142,9 @@
                     android:id="@+id/main_important"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="250dp"
-                    android:layout_marginStart="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:text="@string/list"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -176,11 +173,9 @@
                     android:id="@+id/main_work"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="250dp"
-                    android:layout_marginStart="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:text="@string/list"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -209,16 +204,15 @@
                     android:id="@+id/main_social"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="250dp"
-                    android:layout_marginStart="250dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:text="@string/list"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-    </ScrollView>
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
