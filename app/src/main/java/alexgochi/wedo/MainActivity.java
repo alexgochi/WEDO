@@ -75,31 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         social_count.setText(mCount +" List");
     }
 
-//    @Override
-//    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("TODAY", data_today);
-//        outState.putInt("TOMORROW", data_tomorrow);
-//        outState.putInt("IMPORTANT", data_important);
-//        outState.putInt("WORK", data_work);
-//        outState.putInt("SOCIAL", data_social);
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        data_today = savedInstanceState.getInt("TODAY",0);
-//        today_count.setText(data_today + " List");
-//        data_tomorrow = savedInstanceState.getInt("TOMORROW",0);
-//        tomorrow_count.setText(data_tomorrow + " List");
-//        data_important = savedInstanceState.getInt("IMPORTANT",0);
-//        important_count.setText(data_important + " List");
-//        data_work = savedInstanceState.getInt("WORK",0);
-//        work_count.setText(data_work + " List");
-//        data_social = savedInstanceState.getInt("SOCIAL",0);
-//        social_count.setText(data_social + " List");
-//    }
-
     public void mPieChartLaunch(View view) {
         Intent intent = new Intent(MainActivity.this, OverviewActivity.class);
         startActivity(intent);
