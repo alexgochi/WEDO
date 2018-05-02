@@ -119,23 +119,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        if (id == R.id.today) {
            Intent in_today = new Intent(MainActivity.this, TodayActivity.class);
            startActivityForResult(in_today, TODAY_REQUEST_CODE);
-//           Toast.makeText(getApplicationContext(), "You're in Today Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.tomorrow) {
            Intent in_tomorrow = new Intent(MainActivity.this, TomorrowActivity.class);
            startActivityForResult(in_tomorrow, TOMORROW_REQUEST_CODE);
-//           Toast.makeText(getApplicationContext(), "You're in Tomorrow Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.important) {
            Intent in_important = new Intent(MainActivity.this, ImportantActivity.class);
            startActivityForResult(in_important, IMPORTANT_REQUEST_CODE);
-//           Toast.makeText(getApplicationContext(), "You're in Important Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.work) {
            Intent in_work = new Intent(MainActivity.this, WorkActivity.class);
            startActivityForResult(in_work, WORK_REQUEST_CODE);
-//           Toast.makeText(getApplicationContext(), "You're in Work Activity", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.social) {
            Intent in_social = new Intent(MainActivity.this, SocialActivity.class);
            startActivityForResult(in_social, SOCIAL_REQUEST_CODE);
-//           Toast.makeText(getApplicationContext(), "You're in Social Activity", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

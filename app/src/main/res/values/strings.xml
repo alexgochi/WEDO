@@ -11,7 +11,7 @@
     <string name="work">Work</string>
     <string name="important">Important</string>
     <string name="tomorrow">Tomorrow</string>
-    <string name="today">Today&#032;&#032;</string>
+    <string name="today">Today</string>
     <string name="home">Home</string>
     <string name="done">Done</string>
     <string name="overview">Overview</string>
@@ -23,14 +23,13 @@
     <string name="delete_text">Done</string>
     <string name="todo">TODO</string>
     <string name="total">Total&#032;:&#032;%d </string>
-    <string name="main_total">&#032;%d&#032;List</string>
     <string name="app_today">Today Activity</string>
     <string name="app_tomorrow">Tomorrow Activity</string>
     <string name="app_important">Important Activity</string>
-    <string name="app_social">Sosial Activity</string>
+    <string name="app_social">Social Activity</string>
     <string name="app_work">Work Activity</string>
     <string name="list">0 List</string>
-    <string name="preview_list">Preview List : </string>
+    <string name="preview_list">Preview : </string>
     <string name="search_todo">Search List</string>
 
 

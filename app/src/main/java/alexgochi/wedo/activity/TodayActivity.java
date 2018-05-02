@@ -210,9 +210,18 @@ public class TodayActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+    public void onBackPressed() {
+        int in_today = mCount;
+        Intent intent_today = new Intent();
+        intent_today.putExtra("TODAY", in_today);
+        setResult(RESULT_OK, intent_today);
+        finish();
     }
+
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -237,11 +246,11 @@ public class TodayActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void passData(View view) {
-        int in_today = mCount;
-        Intent intent_today = new Intent();
-        intent_today.putExtra("TODAY", in_today);
-        setResult(RESULT_OK, intent_today);
-        finish();
-    }
+//    public void passData(View view) {
+//        int in_today = mCount;
+//        Intent intent_today = new Intent();
+//        intent_today.putExtra("TODAY", in_today);
+//        setResult(RESULT_OK, intent_today);
+//        finish();
+//    }
 }
