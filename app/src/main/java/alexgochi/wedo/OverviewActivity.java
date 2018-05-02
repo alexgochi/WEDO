@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -46,7 +48,7 @@ public class OverviewActivity extends AppCompatActivity {
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
 
-        pieChart.setExtraOffsets(5,10,5,5);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
         pieChart.setDragDecelerationFrictionCoef(0.25f);
 
         pieChart.setDrawHoleEnabled(true);
@@ -86,16 +88,22 @@ public class OverviewActivity extends AppCompatActivity {
 
         final PieDataSet mDataSet = new PieDataSet(mValue, "");
         mDataSet.setSliceSpace(3f);
-        mDataSet.setSelectionShift(6f);
+        mDataSet.setSelectionShift(10f);
         mDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                int subs = e.toString().indexOf("x: 0.0 y: ");
-                String data = e.toString().substring(subs + 10);
 
-                Toast.makeText(getApplicationContext(), "Value : "+data +" List",Toast.LENGTH_SHORT).show();
+                String[] splits = e.toString().split(" ");
+                String fix = splits[4].split("\\.")[0];
+
+//                String fix = splits[4].substring(0,1);
+
+//                int subs = e.toString().indexOf("x: 0.0 y: ");
+//                String data = e.toString().substring(subs + 10);
+//
+                Toast.makeText(getApplicationContext(), "Value : " + fix + " List", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -109,6 +117,11 @@ public class OverviewActivity extends AppCompatActivity {
         mData.setValueTextColor(Color.BLACK);
 
         pieChart.setData(mData);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
     }
 
     public void getCountToday() {

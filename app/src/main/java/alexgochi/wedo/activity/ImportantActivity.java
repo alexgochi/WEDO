@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,6 +42,7 @@ public class ImportantActivity extends AppCompatActivity {
     ImageView imageImportant;
     TextView important;
     int mCount = 0;
+    EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class ImportantActivity extends AppCompatActivity {
         mHelper = new TaskDBHelper(this);
 
         imageImportant = (ImageView) findViewById(R.id.important);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
         imageImportant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +94,28 @@ public class ImportantActivity extends AppCompatActivity {
             }
         });
 
+        filterData();
         updateUI();
+    }
+
+    private void filterData () {
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                ImportantActivity.this.mAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     private void updateUI() {
