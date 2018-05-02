@@ -10,16 +10,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +40,6 @@ public class TodayActivity extends AppCompatActivity {
     ImageView imageToday;
     TextView today;
     int mCount = 0;
-    EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +49,6 @@ public class TodayActivity extends AppCompatActivity {
         mHelper = new TaskDBHelper(this);
 
         imageToday = (ImageView) findViewById(R.id.today);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
-
         imageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,29 +89,29 @@ public class TodayActivity extends AppCompatActivity {
                 return false;
             }
         });
-        filterData();
+//        filterData();
         updateUI();
     }
 
-    private void filterData () {
-        inputSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                TodayActivity.this.mAdapter.getFilter().filter(cs);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-    }
+//    private void filterData() {
+//        inputSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+//                // When user changed the Text
+//                TodayActivity.this.mAdapter.getFilter().filter(cs);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//                // TODO Auto-generated method stub
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//                // TODO Auto-generated method stub
+//            }
+//        });
+//    }
 
     private void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
@@ -141,7 +137,7 @@ public class TodayActivity extends AppCompatActivity {
 
         getCount();
         today = (TextView) findViewById(R.id.total_today);
-        today.setText("Total : "+ mCount);
+        today.setText("Total : " + mCount);
 
         cursor.close();
         db.close();
@@ -185,7 +181,7 @@ public class TodayActivity extends AppCompatActivity {
         String task = String.valueOf(taskTextView.getText());
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete(TaskContract.TaskEntry.TABLE1,
-                TaskContract.TaskEntry.COL_TASK_TITLE1+ " = ?",
+                TaskContract.TaskEntry.COL_TASK_TITLE1 + " = ?",
                 new String[]{task});
         db.close();
         updateUI();
@@ -226,8 +222,26 @@ public class TodayActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -240,6 +254,7 @@ public class TodayActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_clear) {
             deleteAllTask();
+            Toast.makeText(getApplicationContext(), "All List deleted", Toast.LENGTH_SHORT).show();
             return true;
         }
 

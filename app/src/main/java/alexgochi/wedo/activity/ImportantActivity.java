@@ -10,16 +10,15 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
-import alexgochi.wedo.MainActivity;
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
 import alexgochi.wedo.TaskDBHelper;
@@ -42,7 +40,6 @@ public class ImportantActivity extends AppCompatActivity {
     ImageView imageImportant;
     TextView important;
     int mCount = 0;
-    EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,6 @@ public class ImportantActivity extends AppCompatActivity {
         mHelper = new TaskDBHelper(this);
 
         imageImportant = (ImageView) findViewById(R.id.important);
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
         imageImportant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,29 +90,29 @@ public class ImportantActivity extends AppCompatActivity {
             }
         });
 
-        filterData();
+//        filterData();
         updateUI();
     }
 
-    private void filterData () {
-        inputSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                ImportantActivity.this.mAdapter.getFilter().filter(cs);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-    }
+//    private void filterData () {
+//        inputSearch.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+//                // When user changed the Text
+//                ImportantActivity.this.mAdapter.getFilter().filter(cs);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+//                // TODO Auto-generated method stub
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable arg0) {
+//                // TODO Auto-generated method stub
+//            }
+//        });
+//    }
 
     private void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
@@ -227,8 +223,26 @@ public class ImportantActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -241,6 +255,7 @@ public class ImportantActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_clear) {
             deleteAllTask();
+            Toast.makeText(getApplicationContext(), "All List deleted", Toast.LENGTH_SHORT).show();
             return true;
         }
 
