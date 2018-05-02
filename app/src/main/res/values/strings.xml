@@ -30,6 +30,8 @@
     <string name="app_social">Sosial Activity</string>
     <string name="app_work">Work Activity</string>
     <string name="list">0 List</string>
+    <string name="preview_list">Preview List : </string>
+    <string name="search_todo">Search List</string>
 
 
 </resources>

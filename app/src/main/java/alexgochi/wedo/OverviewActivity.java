@@ -61,11 +61,21 @@ public class OverviewActivity extends AppCompatActivity {
 
         final ArrayList<PieEntry> mValue = new ArrayList<>();
 
-        mValue.add(new PieEntry(mCountToday, "Today"));
-        mValue.add(new PieEntry(mCountTomorrow, "Tomorrow"));
-        mValue.add(new PieEntry(mCountImportant, "Important"));
-        mValue.add(new PieEntry(mCountWork, "Work"));
-        mValue.add(new PieEntry(mCountSocial, "Social"));
+        if (mCountToday > 0) {
+            mValue.add(new PieEntry(mCountToday, "Today"));
+        }
+        if (mCountTomorrow > 0) {
+            mValue.add(new PieEntry(mCountTomorrow, "Tomorrow"));
+        }
+        if (mCountImportant > 0) {
+            mValue.add(new PieEntry(mCountImportant, "Important"));
+        }
+        if (mCountWork > 0) {
+            mValue.add(new PieEntry(mCountWork, "Work"));
+        }
+        if (mCountSocial > 0) {
+            mValue.add(new PieEntry(mCountSocial, "Social"));
+        }
 
         Description description = new Description();
         description.setText("TODO LIST");

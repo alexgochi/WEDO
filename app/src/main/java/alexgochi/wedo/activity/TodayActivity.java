@@ -1,6 +1,8 @@
 package alexgochi.wedo.activity;
 
+import android.app.SearchManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +12,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +22,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,9 +42,10 @@ public class TodayActivity extends AppCompatActivity {
     private TaskDBHelper mHelper;
     private SwipeMenuListView Ltoday;
     private ArrayAdapter<String> mAdapter;
-    ImageView imageToday, pass_button;
+    ImageView imageToday;
     TextView today;
     int mCount = 0;
+    EditText inputSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,8 @@ public class TodayActivity extends AppCompatActivity {
         mHelper = new TaskDBHelper(this);
 
         imageToday = (ImageView) findViewById(R.id.today);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+
         imageToday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +97,28 @@ public class TodayActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        filterData();
         updateUI();
+    }
+
+    private void filterData () {
+        inputSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+                TodayActivity.this.mAdapter.getFilter().filter(cs);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+            }
+        });
     }
 
     private void updateUI() {
@@ -182,6 +211,11 @@ public class TodayActivity extends AppCompatActivity {
             mCount = cursor.getInt(0);
         }
         cursor.close();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
     }
 
     @Override

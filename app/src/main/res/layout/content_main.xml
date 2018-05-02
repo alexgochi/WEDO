@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            android:onClick="mPieChartLaunch"
             app:contentPadding="10dp">
 
             <RelativeLayout
@@ -59,10 +60,19 @@
 
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:text="@string/preview_list"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"/>
+
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:contentPadding="12dp">
 
             <RelativeLayout
@@ -95,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:contentPadding="12dp">
 
             <RelativeLayout
@@ -126,6 +137,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:contentPadding="12dp">
 
             <RelativeLayout
@@ -157,6 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:contentPadding="12dp">
 
             <RelativeLayout
@@ -188,6 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@android:color/transparent"
             app:contentPadding="12dp">
 
             <RelativeLayout
