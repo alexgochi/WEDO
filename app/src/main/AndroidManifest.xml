@@ -10,37 +10,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OverviewActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity android:name=".activity.TodayActivity"
+        <activity android:name=".OverviewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.TodayActivity"
             android:label="@string/app_today"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.TomorrowActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.TomorrowActivity"
             android:label="@string/app_tomorrow"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.ImportantActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.ImportantActivity"
             android:label="@string/app_important"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.WorkActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.WorkActivity"
             android:label="@string/app_work"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.SocialActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.SocialActivity"
             android:label="@string/app_social"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>
