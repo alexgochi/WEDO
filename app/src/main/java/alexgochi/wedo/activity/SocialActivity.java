@@ -7,9 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,26 +26,23 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
+
 import java.util.ArrayList;
 
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
-import alexgochi.wedo.TaskDBHelper;
+import alexgochi.wedo.superb.Counter;
 
-public class SocialActivity extends AppCompatActivity {
-    private TaskDBHelper mHelper;
+public class SocialActivity extends Counter {
+    ImageView imageSocial;
     private SwipeMenuListView Lsocial;
     private ArrayAdapter<String> mAdapter;
-    ImageView imageSocial;
     TextView social;
-    int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
-
-        mHelper = new TaskDBHelper(this);
 
         imageSocial = (ImageView) findViewById(R.id.social);
         imageSocial.setOnClickListener(new View.OnClickListener() {
@@ -90,31 +86,10 @@ public class SocialActivity extends AppCompatActivity {
             }
         });
 
-//        filterData();
         updateUI();
     }
 
-//    private void filterData () {
-//        inputSearch.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-//                // When user changed the Text
-//                SocialActivity.this.mAdapter.getFilter().filter(cs);
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-//                // TODO Auto-generated method stub
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable arg0) {
-//                // TODO Auto-generated method stub
-//            }
-//        });
-//    }
-
-    private void updateUI() {
+    protected void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor cursor = db.query(TaskContract.TaskEntry.TABLE5,
@@ -136,9 +111,9 @@ public class SocialActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
-        getCount();
+        getCountSocial();
         social = (TextView) findViewById(R.id.total_social);
-        social.setText("Total : "+ mCount);
+        social.setText("Total List : "+ mCountSocial);
 
         cursor.close();
         db.close();
@@ -195,30 +170,14 @@ public class SocialActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public void getCount() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE5;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
     @Override
     public void onBackPressed() {
-        int in_today = mCount;
+        int in_today = mCountSocial;
         Intent intent_today = new Intent();
         intent_today.putExtra("SOCIAL", in_today);
         setResult(RESULT_OK, intent_today);
         finish();
     }
-
-    //    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -261,12 +220,4 @@ public class SocialActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void passData(View view) {
-//        int in_today = mCount;
-//        Intent intent_today = new Intent();
-//        intent_today.putExtra("SOCIAL", in_today);
-//        setResult(RESULT_OK, intent_today);
-//        finish();
-//    }
 }

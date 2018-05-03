@@ -23,11 +23,10 @@ import alexgochi.wedo.activity.SocialActivity;
 import alexgochi.wedo.activity.TodayActivity;
 import alexgochi.wedo.activity.TomorrowActivity;
 import alexgochi.wedo.activity.WorkActivity;
+import alexgochi.wedo.superb.Counter;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private TaskDBHelper mHelper;
-    int mCount = 0;
+public class MainActivity extends Counter implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView today_count, tomorrow_count,important_count, work_count, social_count;
     int data_today, data_tomorrow, data_important, data_work, data_social;
@@ -41,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mHelper = new TaskDBHelper(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,23 +55,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getCountToday();
         today_count = (TextView) findViewById(R.id.main_today);
-        today_count.setText(mCount +" List");
+        today_count.setText(mCountToday +" List");
 
         getCountTomorrow();
         tomorrow_count = (TextView) findViewById(R.id.main_tomorrow);
-        tomorrow_count.setText(mCount +" List");
+        tomorrow_count.setText(mCountTomorrow +" List");
 
         getCountImportant();
         important_count = (TextView) findViewById(R.id.main_important);
-        important_count.setText(mCount +" List");
+        important_count.setText(mCountImportant +" List");
 
         getCountWork();
         work_count = (TextView) findViewById(R.id.main_work);
-        work_count.setText(mCount +" List");
+        work_count.setText(mCountWork +" List");
 
         getCountSocial();
         social_count = (TextView) findViewById(R.id.main_social);
-        social_count.setText(mCount +" List");
+        social_count.setText(mCountSocial +" List");
     }
 
     public void mPieChartLaunch(View view) {
@@ -173,58 +170,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void getCountToday() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE1;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
-    public void getCountTomorrow() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE2;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
-    public void getCountImportant() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE3;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
-    public void getCountWork() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE4;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
-    public void getCountSocial() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE5;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
 }

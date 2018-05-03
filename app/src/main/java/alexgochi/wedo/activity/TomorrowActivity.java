@@ -7,9 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,21 +31,18 @@ import java.util.ArrayList;
 import alexgochi.wedo.R;
 import alexgochi.wedo.TaskContract;
 import alexgochi.wedo.TaskDBHelper;
+import alexgochi.wedo.superb.Counter;
 
-public class TomorrowActivity extends AppCompatActivity {
-    private TaskDBHelper mHelper;
+public class TomorrowActivity extends Counter {
+    ImageView imageTomorrow;
     private SwipeMenuListView LTomorrow;
     private ArrayAdapter<String> mAdapter;
-    ImageView imageTomorrow;
     TextView tomorrow;
-    int mCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tomorrow);
-
-        mHelper = new TaskDBHelper(this);
 
         imageTomorrow = (ImageView) findViewById(R.id.tomorrow);
         imageTomorrow.setOnClickListener(new View.OnClickListener() {
@@ -90,31 +86,10 @@ public class TomorrowActivity extends AppCompatActivity {
             }
         });
 
-//        filterData();
         updateUI();
     }
 
-//    private void filterData () {
-//        inputSearch.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-//                // When user changed the Text
-//                TomorrowActivity.this.mAdapter.getFilter().filter(cs);
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-//                // TODO Auto-generated method stub
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable arg0) {
-//                // TODO Auto-generated method stub
-//            }
-//        });
-//    }
-
-    private void updateUI() {
+    protected void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor cursor = db.query(TaskContract.TaskEntry.TABLE2,
@@ -136,9 +111,9 @@ public class TomorrowActivity extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
-        getCount();
+        getCountTomorrow();
         tomorrow = (TextView) findViewById(R.id.total_tomorrow);
-        tomorrow.setText("Total : " +mCount);
+        tomorrow.setText("Total List : " + mCountTomorrow);
 
         cursor.close();
         db.close();
@@ -195,30 +170,14 @@ public class TomorrowActivity extends AppCompatActivity {
         updateUI();
     }
 
-    public void getCount() {
-        String sql = "SELECT COUNT(*) FROM " + TaskContract.TaskEntry.TABLE2;
-        Cursor cursor = mHelper.getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            mCount = cursor.getInt(0);
-        }
-        cursor.close();
-    }
-
     @Override
     public void onBackPressed() {
-        int in_today = mCount;
+        int in_today = mCountTomorrow;
         Intent intent_today = new Intent();
         intent_today.putExtra("TOMORROW", in_today);
         setResult(RESULT_OK, intent_today);
         finish();
     }
-
-    //    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        return keyCode == KeyEvent.KEYCODE_BACK || super.onKeyDown(keyCode, event);
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -262,11 +221,4 @@ public class TomorrowActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    public void passData(View view) {
-//        int in_today = mCount;
-//        Intent intent_today = new Intent();
-//        intent_today.putExtra("TOMORROW", in_today);
-//        setResult(RESULT_OK, intent_today);
-//        finish();
-//    }
 }
