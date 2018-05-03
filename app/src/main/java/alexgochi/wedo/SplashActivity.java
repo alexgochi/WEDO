@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         textView.setText("");
 
-        final long period = 50;
+        final long period = 20;
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

@@ -15,7 +15,7 @@
     <string name="home">Home</string>
     <string name="done">Done</string>
     <string name="overview">Overview</string>
-    <string name="desc_overview">Tab to view statistic</string>
+    <string name="desc_overview">Tap to view statistic</string>
     <string name="todo_list">Todo List</string>
     <string name="hint_note">Note</string>
     <string name="input_todo">List can not be empty!</string>
