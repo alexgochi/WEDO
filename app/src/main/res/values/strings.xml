@@ -31,6 +31,7 @@
     <string name="list">0 List</string>
     <string name="preview_list">Preview : </string>
     <string name="search_todo">Search List</string>
+    <string name="pie_chart">PieChart</string>
 
 
 </resources>

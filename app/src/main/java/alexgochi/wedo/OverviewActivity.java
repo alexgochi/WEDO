@@ -3,6 +3,7 @@ package alexgochi.wedo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -22,6 +23,7 @@ import alexgochi.wedo.superb.Counter;
 
 public class OverviewActivity extends Counter {
     PieChart pieChart;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +31,14 @@ public class OverviewActivity extends Counter {
         setContentView(R.layout.activity_overview);
 
         pieChart = (PieChart) findViewById(R.id.pieChart);
+        textView = (TextView) findViewById(R.id.image);
 
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
 
-        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setExtraOffsets(4, 22, 4, 4);
         pieChart.setDragDecelerationFrictionCoef(0.25f);
 
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(61f);
 
         getCountToday();
@@ -69,7 +70,7 @@ public class OverviewActivity extends Counter {
         description.setTextSize(15);
         pieChart.setDescription(description);
 
-        pieChart.animateY(1000, Easing.EasingOption.EaseInCubic);
+        pieChart.animateY(2000, Easing.EasingOption.EaseInCubic);
 
         final PieDataSet mDataSet = new PieDataSet(mValue, "");
         mDataSet.setSliceSpace(3f);
