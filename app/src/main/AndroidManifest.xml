@@ -33,23 +33,23 @@
         <activity
             android:name=".activity.TodayActivity"
             android:label="@string/app_today"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.TomorrowActivity"
             android:label="@string/app_tomorrow"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.ImportantActivity"
             android:label="@string/app_important"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.WorkActivity"
             android:label="@string/app_work"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.SocialActivity"
             android:label="@string/app_social"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
