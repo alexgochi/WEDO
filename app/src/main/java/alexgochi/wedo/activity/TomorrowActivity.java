@@ -53,6 +53,7 @@ public class TomorrowActivity extends Counter {
         });
 
         LTomorrow = (SwipeMenuListView) findViewById(R.id.list_tomorrow);
+        LTomorrow.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override

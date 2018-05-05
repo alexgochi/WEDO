@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class ImportantActivity extends Counter {
         });
 
         Limportant = (SwipeMenuListView) findViewById(R.id.list_important);
+        Limportant.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override

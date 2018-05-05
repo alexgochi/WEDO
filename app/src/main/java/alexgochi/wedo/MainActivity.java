@@ -2,21 +2,17 @@ package alexgochi.wedo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Serializable;
 
 import alexgochi.wedo.activity.ImportantActivity;
 import alexgochi.wedo.activity.SocialActivity;
@@ -115,18 +111,23 @@ public class MainActivity extends Counter implements NavigationView.OnNavigation
 
        if (id == R.id.today) {
            Intent in_today = new Intent(MainActivity.this, TodayActivity.class);
+           Toast.makeText(getApplicationContext(), "Swipe Right to Delete", Toast.LENGTH_LONG).show();
            startActivityForResult(in_today, TODAY_REQUEST_CODE);
         } else if (id == R.id.tomorrow) {
            Intent in_tomorrow = new Intent(MainActivity.this, TomorrowActivity.class);
+           Toast.makeText(getApplicationContext(), "Swipe Right to Delete", Toast.LENGTH_LONG).show();
            startActivityForResult(in_tomorrow, TOMORROW_REQUEST_CODE);
         } else if (id == R.id.important) {
            Intent in_important = new Intent(MainActivity.this, ImportantActivity.class);
+           Toast.makeText(getApplicationContext(), "Swipe Right to Delete", Toast.LENGTH_LONG).show();
            startActivityForResult(in_important, IMPORTANT_REQUEST_CODE);
         } else if (id == R.id.work) {
            Intent in_work = new Intent(MainActivity.this, WorkActivity.class);
+           Toast.makeText(getApplicationContext(), "Swipe Right to Delete", Toast.LENGTH_LONG).show();
            startActivityForResult(in_work, WORK_REQUEST_CODE);
         } else if (id == R.id.social) {
            Intent in_social = new Intent(MainActivity.this, SocialActivity.class);
+           Toast.makeText(getApplicationContext(), "Swipe Right to Delete", Toast.LENGTH_LONG).show();
            startActivityForResult(in_social, SOCIAL_REQUEST_CODE);
         }
 

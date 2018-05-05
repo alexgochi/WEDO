@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,6 +54,7 @@ public class TodayActivity extends Counter {
         });
 
         Ltoday = (SwipeMenuListView) findViewById(R.id.list_today);
+        Ltoday.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
@@ -215,7 +218,6 @@ public class TodayActivity extends Counter {
             Toast.makeText(getApplicationContext(), "All List deleted", Toast.LENGTH_SHORT).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

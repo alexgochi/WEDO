@@ -53,6 +53,7 @@ public class SocialActivity extends Counter {
         });
 
         Lsocial = (SwipeMenuListView) findViewById(R.id.list_social);
+        Lsocial.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override

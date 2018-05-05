@@ -52,6 +52,7 @@ public class WorkActivity extends Counter {
         });
 
         Lwork = (SwipeMenuListView) findViewById(R.id.list_work);
+        Lwork.setSwipeDirection(SwipeMenuListView.DIRECTION_RIGHT);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
